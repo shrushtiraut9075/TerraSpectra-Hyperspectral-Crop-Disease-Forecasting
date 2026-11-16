@@ -1,0 +1,28 @@
+name: terraspectra
+channels:
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.11.9
+  - gdal>=3.8.0
+  - rasterio>=1.4.0
+  - pyproj>=3.6.0
+  - shapely>=2.0.0
+  - h5py>=3.11.0
+  - zarr>=2.17.0
+  - scikit-learn>=1.4.0
+  - pytorch>=2.2.0
+  - torchvision>=0.17.0
+  - fastapi>=0.110.0
+  - uvicorn>=0.28.0
+  - pydantic>=2.6.0
+  - pyyaml>=6.0.1
+  - einops>=0.7.0
+  - scipy>=1.12.0
+  - matplotlib>=3.8.0
+  - httpx>=0.27.0
+  - pytest>=8.0.0
+  - ruff>=0.3.0
+  - mypy>=1.9.0
+  - pip
+

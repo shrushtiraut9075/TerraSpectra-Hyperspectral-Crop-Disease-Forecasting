@@ -1,0 +1,24 @@
+model_name: "hybrid_3d_vit"
+in_channels: 1
+pca_components: 24
+patch_size: 11
+n_classes: 2
+
+cnn3d:
+  channels: [16, 32, 64]
+  kernel_spectral: [7, 5, 3]
+  kernel_spatial: [3, 3, 3]
+  dropout: 0.1
+
+vit:
+  token_mode: "spectral_groups" # 'spectral_groups' or 'spatial'
+  d_model: 128
+  n_layers: 4
+  n_heads: 4
+  mlp_ratio: 2.0
+  dropout: 0.1
+
+head:
+  predict_horizon: true
+  horizon_days: 21
+

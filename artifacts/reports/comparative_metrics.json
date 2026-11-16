@@ -1,0 +1,110 @@
+{
+  "Hybrid 3D-CNN + ViT": {
+    "model_type": "hybrid",
+    "checkpoint": "best_model.pt",
+    "data_origin": "synthetic",
+    "num_test_samples": 879,
+    "metrics": {
+      "f1_score": 0.9897,
+      "precision": 0.9864,
+      "recall": 0.9931,
+      "auroc": 0.9997,
+      "auprc": 0.9997,
+      "false_alarm_rate": 0.0136,
+      "median_lead_time_days": 21.0,
+      "detected_ge_14_days_ratio": 0.8287,
+      "detected_ge_21_days_ratio": 0.6204,
+      "confusion_matrix": [
+        [
+          436,
+          6
+        ],
+        [
+          3,
+          434
+        ]
+      ]
+    }
+  },
+  "Spectral MLP (Baseline 1)": {
+    "model_type": "mlp",
+    "checkpoint": "best_mlp_seed42.pt",
+    "data_origin": "synthetic",
+    "num_test_samples": 879,
+    "metrics": {
+      "f1_score": 0.9853,
+      "precision": 0.971,
+      "recall": 1.0,
+      "auroc": 0.9994,
+      "auprc": 0.9994,
+      "false_alarm_rate": 0.0293,
+      "median_lead_time_days": 21.0,
+      "detected_ge_14_days_ratio": 0.8089,
+      "detected_ge_21_days_ratio": 0.5778,
+      "confusion_matrix": [
+        [
+          430,
+          13
+        ],
+        [
+          0,
+          436
+        ]
+      ]
+    }
+  },
+  "Spatial 2D-CNN (Baseline 2)": {
+    "model_type": "cnn2d",
+    "checkpoint": "best_cnn2d_seed42.pt",
+    "data_origin": "synthetic",
+    "num_test_samples": 879,
+    "metrics": {
+      "f1_score": 0.9831,
+      "precision": 0.9667,
+      "recall": 1.0,
+      "auroc": 0.9998,
+      "auprc": 0.9998,
+      "false_alarm_rate": 0.0338,
+      "median_lead_time_days": 21.0,
+      "detected_ge_14_days_ratio": 0.85,
+      "detected_ge_21_days_ratio": 0.5909,
+      "confusion_matrix": [
+        [
+          429,
+          15
+        ],
+        [
+          0,
+          435
+        ]
+      ]
+    }
+  },
+  "Hyperspectral 3D-CNN (Baseline 3)": {
+    "model_type": "cnn3d",
+    "checkpoint": "best_cnn3d_seed42.pt",
+    "data_origin": "synthetic",
+    "num_test_samples": 879,
+    "metrics": {
+      "f1_score": 0.9875,
+      "precision": 0.9753,
+      "recall": 1.0,
+      "auroc": 0.9995,
+      "auprc": 0.9995,
+      "false_alarm_rate": 0.0248,
+      "median_lead_time_days": 21.0,
+      "detected_ge_14_days_ratio": 0.8202,
+      "detected_ge_21_days_ratio": 0.5702,
+      "confusion_matrix": [
+        [
+          433,
+          11
+        ],
+        [
+          0,
+          435
+        ]
+      ]
+    }
+  }
+}

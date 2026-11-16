@@ -1,0 +1,90 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+
+# Byte-compiled / optimized / DLL files
+*.dll
+*.pyd
+
+# Node / Frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+web/node_modules/
+web/dist/
+web/.vite/
+
+# Data & Large Rasters (Never commit full hyperspectral cubes)
+data/raw/
+data/uploads/
+data/results/
+data/*.db
+data/*.sqlite*
+*.db
+*.sqlite*
+*.h5
+*.hdf5
+*.tif
+*.tiff
+!docs/images/*.jpg
+!docs/images/*.png
+!DOcumentaion/images/*.jpg
+!DOcumentaion/images/*.png
+
+# Model Checkpoints & Large Artifacts
+artifacts/checkpoints/*.pt
+artifacts/checkpoints/*.pth
+artifacts/pca.joblib
+!artifacts/reports/norm.json
+!artifacts/reports/*.md
+!artifacts/reports/*.json
+!artifacts/reports/*.png
+
+# IDE & OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Test & coverage outputs
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+

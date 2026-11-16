@@ -1,0 +1,40 @@
+scene:
+  height: 200
+  width: 200
+  pixel_size_m: 10.0
+  bands: 224
+  wavelength_min_nm: 400.0
+  wavelength_max_nm: 2500.0
+  utm_crs: "EPSG:32643"
+  origin_x: 362000.0
+  origin_y: 2046000.0
+  time_steps: 8
+  days_between_dates: 7
+  horizon_days: 21
+  stress_detection_threshold: 0.18
+  stress_visible_threshold: 0.65
+  num_scenes: 6
+  random_seed: 42
+
+pca:
+  n_components: 24
+  target_variance: 0.99
+  sample_pixels: 20000
+
+bad_bands:
+  water_vapor_ranges_nm:
+    - [1350, 1450]
+    - [1800, 1950]
+  edge_drop_bands: 4
+
+patches:
+  train_size: 11
+  infer_tile_size: 256
+  infer_overlap: 32
+
+splits:
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  buffer_gap: 11
+

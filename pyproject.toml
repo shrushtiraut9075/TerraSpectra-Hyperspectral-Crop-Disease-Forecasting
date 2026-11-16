@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "teraraspectra"
+version = "1.0.0"
+description = "TerraSpectra: Hyperspectral Crop Disease Forecasting"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Shrushti Raut", email = "shrushtiraut9075@gmail.com" }]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B"]
+ignore = ["E501", "B008", "B904", "B905"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = false
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+check_untyped_defs = false
+disable_error_code = ["no-any-return", "var-annotated", "arg-type", "operator", "assignment", "attr-defined", "return-value"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q"
+testpaths = ["tests"]
+pythonpath = ["."]
+

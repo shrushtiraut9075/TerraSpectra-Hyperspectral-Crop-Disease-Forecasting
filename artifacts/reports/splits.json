@@ -1,0 +1,14 @@
+{
+  "train": [
+    "scene_000",
+    "scene_001",
+    "scene_005",
+    "scene_002"
+  ],
+  "val": [
+    "scene_004"
+  ],
+  "test": [
+    "scene_003"
+  ]
+}

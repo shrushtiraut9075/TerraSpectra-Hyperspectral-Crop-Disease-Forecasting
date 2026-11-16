@@ -1,0 +1,27 @@
+{
+  "model_type": "mlp",
+  "checkpoint": "best_mlp_seed42.pt",
+  "data_origin": "synthetic",
+  "num_test_samples": 879,
+  "metrics": {
+    "f1_score": 0.9853,
+    "precision": 0.971,
+    "recall": 1.0,
+    "auroc": 0.9994,
+    "auprc": 0.9994,
+    "false_alarm_rate": 0.0293,
+    "median_lead_time_days": 21.0,
+    "detected_ge_14_days_ratio": 0.8089,
+    "detected_ge_21_days_ratio": 0.5778,
+    "confusion_matrix": [
+      [
+        430,
+        13
+      ],
+      [
+        0,
+        436
+      ]
+    ]
+  }
+}
