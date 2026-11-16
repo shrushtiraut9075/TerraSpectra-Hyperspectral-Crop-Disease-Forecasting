@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌿 TerraSpectra......
+# 🌿 TerraSpectra
 ### Hyperspectral Crop Disease Forecasting via Hybrid 3D-CNN + Vision Transformer
 
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
