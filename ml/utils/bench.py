@@ -1,17 +1,16 @@
-import argparse
-import json
 import os
+import sys
 import time
-from typing import Any, Dict
-
+import json
+import argparse
+from typing import Dict, Any, List
 import numpy as np
 import rasterio
 
-from ml.data.readers import HSIReader
-from ml.data.synth import generate_synthetic_scene
-from ml.utils.geo import geo_to_pixel
 from ml.utils.profiler import MemoryTracker
-
+from ml.data.synth import generate_synthetic_scene
+from ml.data.readers import HSIReader
+from ml.utils.geo import geo_to_pixel, pixel_to_geo
 
 def run_gis_validation() -> Dict[str, Any]:
     """
@@ -30,7 +29,7 @@ def run_gis_validation() -> Dict[str, Any]:
             width=200,
             bands=224,
             time_steps=8,
-            write_hdf5=True,
+            write_hdf5=True
         )
 
     with open(os.path.join(test_scene_dir, "meta.json"), "r") as f:
@@ -40,12 +39,8 @@ def run_gis_validation() -> Dict[str, Any]:
     utm_crs = meta["crs"]
     transform_list = meta["transform"]
     transform = rasterio.transform.Affine(
-        transform_list[0],
-        transform_list[1],
-        transform_list[2],
-        transform_list[3],
-        transform_list[4],
-        transform_list[5],
+        transform_list[0], transform_list[1], transform_list[2],
+        transform_list[3], transform_list[4], transform_list[5]
     )
 
     gcp_table = []
@@ -62,24 +57,22 @@ def run_gis_validation() -> Dict[str, Any]:
         pixel_error = float(np.sqrt((col_calc - col_true) ** 2 + (row_calc - row_true) ** 2))
         max_error = max(max_error, pixel_error)
 
-        gcp_table.append(
-            {
-                "col_expected": col_true,
-                "row_expected": row_true,
-                "lon": lon,
-                "lat": lat,
-                "col_observed": round(col_calc, 4),
-                "row_observed": round(row_calc, 4),
-                "pixel_error": round(pixel_error, 5),
-            }
-        )
+        gcp_table.append({
+            "col_expected": col_true,
+            "row_expected": row_true,
+            "lon": lon,
+            "lat": lat,
+            "col_observed": round(col_calc, 4),
+            "row_observed": round(row_calc, 4),
+            "pixel_error": round(pixel_error, 5)
+        })
 
     print(f"GIS GCP Validation: Max error = {max_error:.5f} pixels (Target: < 1.0 pixel)")
     assert max_error < 1.0, f"GIS Validation Failed: error {max_error} >= 1.0 px"
 
     # Write gis_validation.md report
     os.makedirs("artifacts/reports", exist_ok=True)
-    report_content = """# GIS Validation Report — TerraSpectra
+    report_content = f"""# GIS Validation Report — TerraSpectra
 
 **Date:** 2026-11-15 · **Status:** PASSED (Gate Review Evidence)
 **Requirement:** Overlay alignment error strictly under 1 pixel at native resolution.
@@ -92,7 +85,7 @@ def run_gis_validation() -> Dict[str, Any]:
 |:---:|:---:|:---:|:---:|:---:|:---:|
 """
     for i, g in enumerate(gcp_table):
-        report_content += f"| {i + 1} | ({g['col_expected']}, {g['row_expected']}) | ({g['lon']:.6f}, {g['lat']:.6f}) | ({g['col_observed']}, {g['row_observed']}) | {g['pixel_error']:.5f} | **PASS** |\n"
+        report_content += f"| {i+1} | ({g['col_expected']}, {g['row_expected']}) | ({g['lon']:.6f}, {g['lat']:.6f}) | ({g['col_observed']}, {g['row_observed']}) | {g['pixel_error']:.5f} | **PASS** |\n"
 
     report_content += f"""
 **Maximum Observed Pixel Error:** `{max_error:.5f} pixels` (Threshold: `< 1.0 pixel`)
@@ -111,7 +104,6 @@ def run_gis_validation() -> Dict[str, Any]:
 
     return {"max_error": max_error, "table": gcp_table}
 
-
 def run_memory_audit() -> Dict[str, Any]:
     """
     T2.11 Extraction Audit:
@@ -121,9 +113,7 @@ def run_memory_audit() -> Dict[str, Any]:
     print("=== Running Memory Audit (Extraction Audit) ===")
     test_scene_dir = "data/raw/synth_v1/scene_000"
     if not os.path.exists(os.path.join(test_scene_dir, "meta.json")):
-        generate_synthetic_scene(
-            "scene_000", test_scene_dir, height=200, width=200, bands=224, time_steps=8
-        )
+        generate_synthetic_scene("scene_000", test_scene_dir, height=200, width=200, bands=224, time_steps=8)
 
     sample_tif = os.path.join(test_scene_dir, "t00.tif")
     file_size_mb = os.path.getsize(sample_tif) / (1024 * 1024)
@@ -162,7 +152,7 @@ def run_memory_audit() -> Dict[str, Any]:
 |---|---|---|---|
 | **Single Date Cube on Disk** | `{file_size_mb:.2f} MB` | — | Documented |
 | **Full 8-Date Scene on Disk** | `{file_size_mb * 8:.2f} MB` | — | Documented |
-| **Peak Ingestion System RAM (RSS)** | `{stats["rss_mb"]:.1f} MB` | `< 4,000 MB` | **PASS** |
+| **Peak Ingestion System RAM (RSS)** | `{stats['rss_mb']:.1f} MB` | `< 4,000 MB` | **PASS** |
 | **Batch Tensor Shape** | `(128, 1, 24, 11, 11)` | Float32 | **PASS** |
 | **Batch Memory Size** | `1.48 MB` | Compact 3D tensor | **PASS** |
 | **Windowed Ingestion Throughput** | `> 450 patches/sec` | `> 100 patches/sec` | **PASS** |
@@ -175,9 +165,7 @@ def run_memory_audit() -> Dict[str, Any]:
 |---|---|---|---|
 """
     for w_size, elapsed in window_times:
-        report_content += (
-            f"| {w_size} × {w_size} | {(128 // w_size) ** 2} | {elapsed:.4f}s | Fast streaming |\n"
-        )
+        report_content += f"| {w_size} × {w_size} | { (128 // w_size) ** 2 } | {elapsed:.4f}s | Fast streaming |\n"
 
     report_content += """
 ---
@@ -193,7 +181,6 @@ def run_memory_audit() -> Dict[str, Any]:
         f.write(report_content)
 
     return stats
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

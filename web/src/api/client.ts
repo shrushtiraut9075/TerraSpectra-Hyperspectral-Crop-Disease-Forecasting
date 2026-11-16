@@ -38,7 +38,8 @@ export async function searchLocations(query: string): Promise<LocationSearchResu
 }
 
 export async function fetchHealth(): Promise<{ status: string; gpu: boolean; model_loaded: boolean; version: string }> {
-  const res = await fetch('/health');
+  const healthUrl = API_BASE.includes('/api/v1') ? ${API_BASE}/health : '/health';
+  const res = await fetch(healthUrl);
   if (!res.ok) throw new Error('Health check failed');
   return res.json();
 }

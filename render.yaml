@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: teraraspectra
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: DATA_ROOT
+        value: data
+      - key: ARTIFACTS_ROOT
+        value: artifacts
+      - key: SQLITE_DB_PATH
+        value: data/teraraspectra.db
