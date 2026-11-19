@@ -22,7 +22,7 @@
 
 ---
 
-## 📌 Executive Summary & Visionllllllll
+## 📌 Executive Summary & Vision
 
 Conventional agricultural remote sensing relies on standard RGB or simple multispectral indices (such as NDVI). These indicators detect disease **only after leaves exhibit macroscopic chlorosis and necrosis**, by which point fungal mycelia have already proliferated throughout the canopy and yield loss is irreversible.
 
