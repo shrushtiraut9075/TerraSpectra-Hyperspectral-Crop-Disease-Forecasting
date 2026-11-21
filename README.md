@@ -43,7 +43,7 @@ Hyperspectral sensors measure narrow contiguous bands across the electromagnetic
 <img src="DOcumentaion/images/spectral_curves.png" alt="Hyperspectral Diagnostic Signatures" width="90%" style="border-radius: 8px;" />
 </div>
 
-| Spectral Region | Band Range (nm) | Physiological Significance & Anomaly Detection |
+| Spectral Region | Band Range (nm) |mmmm Physiological Significance & Anomaly Detection |
 |---|:---:|---|
 | **Chlorophyll Absorption** | 450 – 670 nm | Photosynthetic pigment absorption (Blue 450nm & Red 670nm). |
 | **Red-Edge Transition** | 690 – 740 nm | Steep slope between red absorption and NIR plateau. Fungal stress induces an early blue-shift toward shorter wavelengths. |
