@@ -123,7 +123,7 @@ Models were evaluated on a **spatially disjoint held-out test split (`scene_003`
 
 ---
 
-## 🚀 Quickstart & Setup
+## 🚀 Quickstart & Setup..mmm
 
 ### Prerequisites
 - **Python**: 3.11+
