@@ -37,7 +37,7 @@ Hyperspectral sensors measure narrow contiguous bands across the electromagnetic
 
 ---
 
-## 🔬 Hyperspectral Diagnostic Signatures mmm mmm
+## 🔬 Hyperspectral Diagnostic Signatures
 
 <div align="center">
 <img src="DOcumentaion/images/spectral_curves.png" alt="Hyperspectral Diagnostic Signatures" width="90%" style="border-radius: 8px;" />
